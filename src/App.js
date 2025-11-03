@@ -13,8 +13,10 @@ function App() {
     };
     loadTodos();
   }, []);
-  const createTodo = todoText => {
-    // Logic to create a new todo
+  const createTodo = async todoText => {
+    const response = await axios.post('/todos', { newTodoText: todoText });
+    const newTodo = response.data;
+    setTodos([todos.concat(newTodo)]);
   };
   
   const completeTodo = todoId => {
